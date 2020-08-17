@@ -9,7 +9,7 @@ CORS(app)
 db = mongo.db.users
 
 
-@app.route('/users', methods=['POST'])
+@app.route('/user', methods=['POST'])
 def crate_user():
     result = db.insert_one({
         'name': request.json['name'],
@@ -17,7 +17,7 @@ def crate_user():
         'password': request.json['password']
     })
     print(str(ObjectId(result.inserted_id)))
-    return 'received'
+    return jsonify({'msg': 'User created'})
 
 
 @app.route('/users', methods=['GET'])
